@@ -160,7 +160,7 @@ void locating(double *instant)
             {
                 locations[index].strikes++;
                 strikes += locations[index].strikes;
-                printf("Strike! Location #%03d: %d odd & %d even vessels at %f instant of #%03d sampling interval.\n",
+                printf("Strike! Location #%03d: %d odd & %d even vessels at %f instant of #%04d sampling interval.\n",
                        index,
                        locations[index].oddVessels,
                        locations[index].evenVessels,
