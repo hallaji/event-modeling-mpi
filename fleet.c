@@ -16,10 +16,10 @@ const double TIME_SAMPLING_INTERVAL = 0.01;
 const int MAXIMUM_LOCATIONS = 1000;
 const int MASTER = 0;
 
-int rank, size, strikes = 0, samples = 0;
+int strikes = 0, samples = 0;
 
 /**
- * Main function controls operation of the program.
+ * Main function controls the operation of the program.
  * @param rgc The number of arguments passed to the program
  * @param argv A one-dimensional array of arguments
  * @return zero if it is successful, non-zero indicating error otherwise.
@@ -28,6 +28,7 @@ int main(int argc, char **argv)
 {
     MPI_Init(&argc, &argv);
 
+    int rank, size;
     MPI_Comm_size(MPI_COMM_WORLD, &size);
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 
@@ -82,9 +83,11 @@ double getRate(int strikes, int samples)
  */
 int getRandom()
 {
+    int rank;
+    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     srand((rank + 1) * clock());
 
-    return rand() % (MAXIMUM_LOCATIONS - 1) + 1;
+    return rand() % MAXIMUM_LOCATIONS;
 }
 
 /**
@@ -110,6 +113,8 @@ void execute(void (*f)(double *), double duration)
  */
 void sampling(double *instant)
 {
+    int rank;
+    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     if (rank == MASTER)
     {
         samples++;
@@ -124,6 +129,9 @@ void sampling(double *instant)
 void locating(double *instant)
 {
     int location;
+    int rank, size;
+    MPI_Comm_size(MPI_COMM_WORLD, &size);
+    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 
     if (rank != MASTER)
     {
