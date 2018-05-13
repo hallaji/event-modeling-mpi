@@ -1,5 +1,5 @@
 # Distributed Event Modelling with MPI
-Naval fleet patrols an area comprising `1000` distinct locations. Each vessel can occupy any one of these locations randomly at the end of sampling interval. For a vessel to be able to launch a strike, other vessels must accompany it. This program provides a simple naval fleet solution.
+This program provides a simple solution for the naval fleet problem. The assumption is that a naval fleet patrols an area comprising `1000` distinct locations and each vessel can occupy any one of these locations randomly at the end of sampling interval. However, for a vessel to be able to launch a strike, other vessels must accompany it.
 
 ## Dependencies
 * open-mpi
@@ -20,7 +20,7 @@ The shell script `fleet.sh` is used to repeat the program three times in order t
 `mpicc` is a convenience wrapper for the underlying C compiler. It compiles and links MPI programs written in C. `mpirun` is a shell script that attempts to hide the differences in starting jobs for various devices from the user. Mpirun attempts to determine what kind of machine it is running on and start the required number of jobs on that machine.
 
 ## Compile and Run Manually
-`--oversubscribe` option may need if the number of slots is limited.
+`--oversubscribe` option may need if the number of slots is limited in your machine.
 ```
 $ mpicc -o fleet fleet.c
 $ mpirun --oversubscribe -np 16 fleet
@@ -33,6 +33,3 @@ $ mpirun --oversubscribe -np 16 fleet
 3. There is no limit on the number of vessels in the fleet. The objective is to achieve the highest possible strike rate. It may however be pointed out that increases in fleet size will increase the probability of satisfying Rule no. 1 (above), but doing so will also slow the program owing to higher inter-process communication overheads.
 4. The vessel movement is instantaneous and can be to a non-contagious location. In other words there is no constraint as to how a vessel moves from one location to another (except for the location being randomly assigned)
 5. Sampling interval is a small fraction of 60 seconds i.e. the overall runtime period stipulated for calculating the total number of strikes.
-
-## Licence
-MIT licence.
