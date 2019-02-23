@@ -26,7 +26,7 @@ $ mpicc -o fleet fleet.c
 $ mpirun --oversubscribe -np 16 fleet
 ```
 
-## Ruls and Assumptions
+## Rules and Assumptions
 
 1. At least one odd numbered and two even numbered vessels share the same location, at a given point in time, for a strike to be counted. MPI rank `1` to `n` may be used to number each vessel in the fleet.
 2. The fleet may generate more than one strike at an instant of time (it will however depend on the number of locations meeting the strike criterion, item 1 above, at that instant of time).
