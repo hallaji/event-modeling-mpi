@@ -20,7 +20,7 @@ The shell script `fleet.sh` is used to repeat the program three times in order t
 `mpicc` is a convenience wrapper for the underlying C compiler. It compiles and links MPI programs written in C. `mpirun` is a shell script that attempts to hide the differences in starting jobs for various devices from the user. Mpirun attempts to determine what kind of machine it is running on and start the required number of jobs on that machine.
 
 ## Compile and Run Manually
-`--oversubscribe` option may need if the number of slots is limited in your machine.
+`--oversubscribe` option is required if the number of slots is limited in your machine.
 ```
 $ mpicc -o fleet fleet.c
 $ mpirun --oversubscribe -np 16 fleet
